@@ -27,7 +27,7 @@ namespace BubbleSort
         private void AddNumbers(object sender, EventArgs e)
         {
             Random random = new Random();
-            int qtd = 500;
+            int qtd = 5;
             while (NumbersList.Count < 2000) 
             { 
                 for (int i = 0; i < qtd; i++)
@@ -37,7 +37,6 @@ namespace BubbleSort
                 }
                 BubbleSort();
                 DrawGraphic();
-
             }
         }
         
@@ -66,14 +65,5 @@ namespace BubbleSort
         {
             Graphic.Series["Series1"].Points.AddXY(NumbersList.Count, time);
         }
-
-        public void PrintList(List<int> l)
-        {
-            foreach (int item in l)
-            {
-                Console.Write(item.ToString());
-            }
-        }
-
     }
 }
