@@ -9,22 +9,24 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace BubbleSort
 {
     public partial class Form1 : Form
     {
+       
         public Form1()
         {
             InitializeComponent();
         }
         List<int>NumbersList = new List<int>();
         Stopwatch stopwatch = new Stopwatch();
-      
+        long time = 0;
         private void AddNumbers(object sender, EventArgs e)
         {
             Random random = new Random();
-            int qtd = 1000;
+            int qtd = 5;
             for (int i = 0; i < qtd; i++)
             {
                 int n = random.Next(1, qtd);
@@ -39,8 +41,7 @@ namespace BubbleSort
 
         private void BubbleSort(object sender, EventArgs e)
         {
-            stopwatch.Start();
-            
+            stopwatch.Start();   
             for (int i = 0; i < NumbersList.Count -1; i++)
             {
                 for (int j = i + 1; j < NumbersList.Count; j++)
@@ -56,9 +57,13 @@ namespace BubbleSort
                 }
             }
             stopwatch.Stop();
+            time += stopwatch.Elapsed.Milliseconds;
             PrintList(NumbersList);
             Console.WriteLine();
             Console.WriteLine("Time elapsed: {0}", stopwatch.Elapsed);
+            Console.WriteLine();
+            Console.WriteLine(time+"hue");
+            Graphic.Series["Series1"].Points.AddXY(NumbersList.Count, time);
           
         }
 
