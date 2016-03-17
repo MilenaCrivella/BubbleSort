@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,7 +19,8 @@ namespace BubbleSort
             InitializeComponent();
         }
         List<int>NumbersList = new List<int>();
-        int tempo = 0;
+        Stopwatch stopwatch = new Stopwatch();
+      
         private void AddNumbers(object sender, EventArgs e)
         {
             Random random = new Random();
@@ -36,41 +39,27 @@ namespace BubbleSort
 
         private void BubbleSort(object sender, EventArgs e)
         {
-            System.Timers.Timer t = new System.Timers.Timer(1);
-            t.Start();
-            t.Elapsed += OnTimedEvent;
-            // zera time
-            // start
+            stopwatch.Start();
+            
             for (int i = 0; i < NumbersList.Count -1; i++)
             {
                 for (int j = i + 1; j < NumbersList.Count; j++)
                 {
-                //Console.WriteLine(NumbersList.ElementAt(i) + "::" + NumbersList.ElementAt(j));
                     if (NumbersList[i] > NumbersList[j])
                     {
-                        // trocar!
                         int A = NumbersList.ElementAt(i);
                         int B = NumbersList.ElementAt(j);
 
                         NumbersList[i] = B;
                         NumbersList[j] = A;
-                        //Console.WriteLine("trocou " + i.ToString() + " com " + j.ToString());
                     }
-                    //Console.WriteLine(">> " + NumbersList.ElementAt(j));
                 }
-                //Console.WriteLine(NumbersList.ElementAt(i));
             }
-            // stop
-            t.Stop();
-            // save/print time
+            stopwatch.Stop();
             PrintList(NumbersList);
             Console.WriteLine();
-            Console.WriteLine(tempo);
-        }
-
-        private void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
-        {
-            tempo++;
+            Console.WriteLine("Time elapsed: {0}", stopwatch.Elapsed);
+          
         }
 
         public void PrintList(List<int> l)
