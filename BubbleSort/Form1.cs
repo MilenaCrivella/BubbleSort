@@ -64,6 +64,7 @@ namespace BubbleSort
         private void DrawGraphic()
         {
             Graphic.Series["Series1"].Points.AddXY(NumbersList.Count, time);
+            Graphic.Update();
         }
     }
 }
