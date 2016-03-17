@@ -71,7 +71,7 @@ namespace BubbleSort
         {
             foreach (int item in l)
             {
-                //Console.Write(item.ToString());
+                Console.Write(item.ToString());
             }
         }
 
