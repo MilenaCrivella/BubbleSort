@@ -20,29 +20,31 @@ namespace BubbleSort
         {
             InitializeComponent();
         }
+
         List<int>NumbersList = new List<int>();
         Stopwatch stopwatch = new Stopwatch();
         long time = 0;
         private void AddNumbers(object sender, EventArgs e)
         {
             Random random = new Random();
-            int qtd = 5;
-            for (int i = 0; i < qtd; i++)
-            {
-                int n = random.Next(1, qtd);
-                NumbersList.Add(n);
-            }
-            
-            foreach (int l in NumbersList)
-            {
-                    Console.WriteLine(l.ToString());
-            }  
-        }
+            int qtd = 500;
+            while (NumbersList.Count < 2000) 
+            { 
+                for (int i = 0; i < qtd; i++)
+                {
+                    int n = random.Next(1, qtd);
+                    NumbersList.Add(n);
+                }
+                BubbleSort();
+                DrawGraphic();
 
-        private void BubbleSort(object sender, EventArgs e)
+            }
+        }
+        
+        private void BubbleSort() 
         {
-            stopwatch.Start();   
-            for (int i = 0; i < NumbersList.Count -1; i++)
+            stopwatch.Start();
+            for (int i = 0; i < NumbersList.Count - 1; i++)
             {
                 for (int j = i + 1; j < NumbersList.Count; j++)
                 {
@@ -58,13 +60,11 @@ namespace BubbleSort
             }
             stopwatch.Stop();
             time += stopwatch.Elapsed.Milliseconds;
-            PrintList(NumbersList);
-            Console.WriteLine();
-            Console.WriteLine("Time elapsed: {0}", stopwatch.Elapsed);
-            Console.WriteLine();
-            Console.WriteLine(time+"hue");
+        }
+
+        private void DrawGraphic()
+        {
             Graphic.Series["Series1"].Points.AddXY(NumbersList.Count, time);
-          
         }
 
         public void PrintList(List<int> l)
